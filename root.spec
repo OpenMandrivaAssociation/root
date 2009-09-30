@@ -18,7 +18,7 @@ Patch0:		root_v5.24.00-build.patch
 BuildRequires:	fftw3-devel
 BuildRequires:	GL-devel
 BuildRequires:	libiodbc-devel
-BuildRequires:	libkrb53-devel
+BuildRequires:	libkrb-devel
 BuildRequires:	libldap-devel
 BuildRequires:	libqt-devel
 BuildRequires:	libxft-devel
