@@ -1,6 +1,6 @@
 %define name	root
 %define version	v5.24.00
-%define release	%mkrel 1
+%define release	%mkrel 2
 %define rootdir	%{_datadir}/%{name}
 
 Name:		%{name}
@@ -45,7 +45,7 @@ ROOT applications to analyze their data or to perform simulations.
 
 #------------------------------------------------------------------------
 %build
-%define common	--prefix=%{_prefix} --libdir=%{_libdir}/root --cintincdir=%{rootdir}/cint
+%define common	--prefix=%{_prefix} --libdir=%{_libdir}/root --cintincdir=%{rootdir}/cint --bindir=%{rootdir}/bin
 
 %ifarch %{ix86}
 ./configure linux %{common}
@@ -64,7 +64,23 @@ ROOT applications to analyze their data or to perform simulations.
 mkdir -p %{buildroot}%{_sysconfdir}/ld.so.conf.d
 echo %{_libdir}/%{name}	> %{buildroot}%{_sysconfdir}/ld.so.conf.d/%{name}.conf
 
-perl -pi -e 's|^(cd $ROOTSYS)|ROOTSYS=%{_prefix}\n$1|;' %{buildroot}%{_bindir}/roots
+# make export ROOTSYS=%{rootdir} functional
+for f in test tutorials; do
+    # in case of --short-circuit -bi
+    rm -f %{buildroot}%{rootdir}/$f
+    ln -sf %{_datadir}/doc/%{name}/$f %{buildroot}%{rootdir}/$f
+done
+
+mkdir -p %{buildroot}%{_bindir}
+cat > %{buildroot}%{_bindir}/%{name} << EOF
+#!/bin/sh
+
+export ROOTSYS=%{rootdir}
+export PATH=%{rootdir}/bin:\$PATH
+%{rootdir}/bin/%{name} "\$@"
+EOF
+chmod +x %{buildroot}%{_bindir}/%{name}
+
 
 #------------------------------------------------------------------------
 %clean
@@ -77,7 +93,7 @@ rm -fr %{buildroot}
 %dir %{_sysconfdir}/%{name}
 %{_sysconfdir}/%{name}/*
 %{_sysconfdir}/ld.so.conf.d/%{name}.conf
-%{_bindir}/*
+%{_bindir}/%{name}
 %dir %{_libdir}/%{name}
 %{_libdir}/%{name}/*
 %{_datadir}/aclocal/root.m4
