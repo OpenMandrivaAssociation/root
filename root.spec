@@ -1,6 +1,6 @@
 %define name	root
 %define version	v5.24.00
-%define release	%mkrel 2
+%define release	%mkrel 3
 %define rootdir	%{_datadir}/%{name}
 
 Name:		%{name}
@@ -16,20 +16,28 @@ BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 Patch0:		root_v5.24.00-build.patch
 
 BuildRequires:	fftw3-devel
+BuildRequires:	freetype2-devel
 BuildRequires:	GL-devel
+BuildRequires:	libftgl-devel
+BuildRequires:	libgsl-devel
 BuildRequires:	libiodbc-devel
 BuildRequires:	libkrb-devel
 BuildRequires:	libldap-devel
+BuildRequires:	libpng-devel
 BuildRequires:	libqt-devel
 BuildRequires:	libxft-devel
 BuildRequires:	libxml-devel
 BuildRequires:	openssl-devel
 BuildRequires:	pcre-devel
 BuildRequires:	postgresql-devel
+BuildRequires:	readline-devel
 BuildRequires:	ruby-devel
 BuildRequires:	tiff-devel
 BuildRequires:	zlib-devel
 %py_requires	-d
+
+# x3d
+Requires:	x11-font-sony-misc
 
 %description
 ROOT is a framework for data processing, born at CERN, at the heart of the
@@ -45,15 +53,28 @@ ROOT applications to analyze their data or to perform simulations.
 
 #------------------------------------------------------------------------
 %build
-%define common	--prefix=%{_prefix} --libdir=%{_libdir}/root --cintincdir=%{rootdir}/cint --bindir=%{rootdir}/bin
-
+# not an autotools configure (it just quarks like one)
+./configure				\
 %ifarch %{ix86}
-./configure linux %{common}
+	linux				\
 %endif
-
 %ifarch x86_64
-./configure linuxx8664gcc %{common}
+	linuxx8664gcc			\
 %endif
+	--prefix=%{_prefix} 		\
+	--libdir=%{_libdir}/root	\
+	--cintincdir=%{rootdir}/cint	\
+	--bindir=%{rootdir}/bin		\
+	--enable-roofit			\
+	--enable-gdml			\
+	--enable-minuit2		\
+	--enable-table			\
+	--enable-unuran			\
+	--enable-explicitlink		\
+	--enable-gsl-shared		\
+	--enable-qt			\
+	--enable-qtgsi			\
+	--enable-ruby
 
 %make
 
