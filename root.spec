@@ -1,6 +1,6 @@
 %define name	root
-%define version	v5.24.00
-%define release	%mkrel 3
+%define version	v5.24.00b
+%define release	%mkrel 1
 %define rootdir	%{_datadir}/%{name}
 
 Name:		%{name}
@@ -10,11 +10,8 @@ Version:	%{version}
 Release:	%{release}
 Summary:	CERN framework for data processing
 URL:		http://root.cern.ch/drupal
-Source0:	ftp://root.cern.ch/root/root_v5.24.00.source.tar.gz
+Source0:	ftp://root.cern.ch/root/%{name}_%{version}.source.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-
-Patch0:		root_v5.24.00-build.patch
-
 BuildRequires:	fftw3-devel
 BuildRequires:	freetype2-devel
 BuildRequires:	GL-devel
@@ -48,7 +45,6 @@ ROOT applications to analyze their data or to perform simulations.
 #------------------------------------------------------------------------
 %prep
 %setup -q -n %{name}
-%patch0 -p1
 
 
 #------------------------------------------------------------------------
