@@ -1,6 +1,6 @@
 %define name	root
 %define version	v5.24.00b
-%define release	%mkrel 1
+%define release	%mkrel 2
 %define rootdir	%{_datadir}/%{name}
 
 Name:		%{name}
@@ -17,13 +17,17 @@ BuildRequires:	freetype2-devel
 BuildRequires:	GL-devel
 BuildRequires:	libftgl-devel
 BuildRequires:	libgsl-devel
+BuildRequires:	libhepmc-devel
 BuildRequires:	libiodbc-devel
 BuildRequires:	libkrb-devel
 BuildRequires:	libldap-devel
 BuildRequires:	libpng-devel
+BuildRequires:	libpythia-devel
 BuildRequires:	libqt-devel
 BuildRequires:	libxft-devel
 BuildRequires:	libxml-devel
+BuildRequires:	libxpm-devel
+BuildRequires:	mysql-devel
 BuildRequires:	openssl-devel
 BuildRequires:	pcre-devel
 BuildRequires:	postgresql-devel
@@ -50,26 +54,29 @@ ROOT applications to analyze their data or to perform simulations.
 #------------------------------------------------------------------------
 %build
 # not an autotools configure (it just quarks like one)
-./configure				\
+./configure						\
 %ifarch %{ix86}
-	linux				\
+	linux						\
 %endif
 %ifarch x86_64
-	linuxx8664gcc			\
+	linuxx8664gcc					\
 %endif
-	--prefix=%{_prefix} 		\
-	--libdir=%{_libdir}/root	\
-	--cintincdir=%{rootdir}/cint	\
-	--bindir=%{rootdir}/bin		\
-	--enable-roofit			\
-	--enable-gdml			\
-	--enable-minuit2		\
-	--enable-table			\
-	--enable-unuran			\
-	--enable-explicitlink		\
-	--enable-gsl-shared		\
-	--enable-qt			\
-	--enable-qtgsi			\
+	--prefix=%{_prefix} 				\
+	--libdir=%{_libdir}/root			\
+	--cintincdir=%{rootdir}/cint			\
+	--bindir=%{rootdir}/bin				\
+	--enable-roofit					\
+	--enable-gdml					\
+	--enable-minuit2				\
+	--enable-table					\
+	--enable-unuran					\
+	--enable-explicitlink				\
+	--enable-gsl-shared				\
+	--enable-pythia8				\
+	--with-pythia8-incdir=%{_includedir}/pythia	\
+	--with-pythia8-libdir=%{_libdir}		\
+	--enable-qt					\
+	--enable-qtgsi					\
 	--enable-ruby
 
 %make
