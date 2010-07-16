@@ -3,6 +3,9 @@
 %define release	%mkrel 1
 %define rootdir	%{_datadir}/%{name}
 
+%define _binary_payload w1.gzdio
+%define _source_payload w1.gzdio
+
 Name:		%{name}
 Group:		Sciences/Physics
 License:	GPL
