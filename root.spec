@@ -1,6 +1,6 @@
 %define name	root
-%define version	v5.26.00
-%define release	%mkrel 2
+%define version	v5.27.04
+%define release	%mkrel 1
 %define rootdir	%{_datadir}/%{name}
 
 Name:		%{name}
@@ -11,6 +11,7 @@ Release:	%{release}
 Summary:	CERN framework for data processing
 URL:		http://root.cern.ch/drupal
 Source0:	ftp://root.cern.ch/root/%{name}_%{version}.source.tar.gz
+Source1:	ftp://root.cern.ch/root/html527.tar.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	fftw3-devel
 BuildRequires:	freetype2-devel
@@ -45,11 +46,40 @@ ROOT is a framework for data processing, born at CERN, at the heart of the
 research on high-energy physics.  Every day, thousands of physicists use
 ROOT applications to analyze their data or to perform simulations.
 
+%files
+%defattr(-,root,root)
+%dir %{_sysconfdir}/%{name}
+%{_sysconfdir}/%{name}/*
+%{_sysconfdir}/ld.so.conf.d/%{name}.conf
+%{_bindir}/%{name}
+%dir %{_libdir}/%{name}
+%{_libdir}/%{name}/*
+%{_datadir}/aclocal/root.m4
+%{_datadir}/emacs/site-lisp/root-help.el
+%dir %{_includedir}/%{name}
+%{_includedir}/%{name}/*
+%dir %{rootdir}
+ %{rootdir}/*
+
+#------------------------------------------------------------------------
+%package	doc
+Group:		Development/Other
+Summary:	Documentation for %{name}
+
+%description	doc
+ROOT is a framework for data processing, born at CERN, at the heart of the
+research on high-energy physics.  Every day, thousands of physicists use
+ROOT applications to analyze their data or to perform simulations.
+
+%files		doc
+%defattr(-,root,root)
+%doc %dir %{_docdir}/%{name}
+%doc %{_docdir}/%{name}/*
+%{_mandir}/man1/*
 
 #------------------------------------------------------------------------
 %prep
 %setup -q -n %{name}
-
 
 #------------------------------------------------------------------------
 %build
@@ -81,7 +111,6 @@ ROOT applications to analyze their data or to perform simulations.
 
 %make
 
-
 #------------------------------------------------------------------------
 %install
 %makeinstall_std
@@ -105,27 +134,8 @@ export PATH=%{rootdir}/bin:\$PATH
 EOF
 chmod +x %{buildroot}%{_bindir}/%{name}
 
+tar zxf %{SOURCE1} -C %{buildroot}/%{_docdir}
 
 #------------------------------------------------------------------------
 %clean
 rm -fr %{buildroot}
-
-
-#------------------------------------------------------------------------
-%files
-%defattr(-,root,root)
-%dir %{_sysconfdir}/%{name}
-%{_sysconfdir}/%{name}/*
-%{_sysconfdir}/ld.so.conf.d/%{name}.conf
-%{_bindir}/%{name}
-%dir %{_libdir}/%{name}
-%{_libdir}/%{name}/*
-%{_datadir}/aclocal/root.m4
-%{_datadir}/emacs/site-lisp/root-help.el
-%dir %{_includedir}/%{name}
-%{_includedir}/%{name}/*
-%dir %{rootdir}
- %{rootdir}/*
-%doc %dir %{_docdir}/%{name}
-%doc %{_docdir}/%{name}/*
-%{_mandir}/man1/*
