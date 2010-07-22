@@ -134,7 +134,8 @@ export PATH=%{rootdir}/bin:\$PATH
 EOF
 chmod +x %{buildroot}%{_bindir}/%{name}
 
-tar zxf %{SOURCE1} -C %{buildroot}/%{_docdir}
+mkdir -p %{buildroot}%{_docdir}/%{name}
+tar zxf %{SOURCE1} -C %{buildroot}%{_docdir}/%{name}
 
 #------------------------------------------------------------------------
 %clean
