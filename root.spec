@@ -1,6 +1,6 @@
 %define name	root
 %define version	v5.27.04
-%define release	%mkrel 1
+%define release	%mkrel 2
 %define rootdir	%{_datadir}/%{name}
 
 Name:		%{name}
@@ -65,6 +65,7 @@ ROOT applications to analyze their data or to perform simulations.
 %package	doc
 Group:		Development/Other
 Summary:	Documentation for %{name}
+BuildArch: noarch
 
 %description	doc
 ROOT is a framework for data processing, born at CERN, at the heart of the
