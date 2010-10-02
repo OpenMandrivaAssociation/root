@@ -1,6 +1,6 @@
 %define name	root
-%define version	v5.27.04
-%define release	%mkrel 2
+%define version	v5.27.06
+%define release	%mkrel 1
 %define rootdir	%{_datadir}/%{name}
 
 Name:		%{name}
@@ -10,8 +10,8 @@ Version:	%{version}
 Release:	%{release}
 Summary:	CERN framework for data processing
 URL:		http://root.cern.ch/drupal
-Source0:	ftp://root.cern.ch/root/%{name}_%{version}.source.tar.gz
-Source1:	ftp://root.cern.ch/root/html527.tar.gz
+Source0:	ftp://root.cern.ch/root/%{name}_%{version}.source.tar.xz
+Source1:	ftp://root.cern.ch/root/html527.tar.xz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	fftw3-devel
 BuildRequires:	freetype2-devel
@@ -59,7 +59,7 @@ ROOT applications to analyze their data or to perform simulations.
 %dir %{_includedir}/%{name}
 %{_includedir}/%{name}/*
 %dir %{rootdir}
- %{rootdir}/*
+%{rootdir}/*
 
 #------------------------------------------------------------------------
 %package	doc
@@ -136,7 +136,11 @@ EOF
 chmod +x %{buildroot}%{_bindir}/%{name}
 
 mkdir -p %{buildroot}%{_docdir}/%{name}
+%if %{mdkversion} < 201010
+xz -cd %{SOURCE1} | tar -xf -C %{buildroot}%{_docdir}/%{name}
+%else
 tar zxf %{SOURCE1} -C %{buildroot}%{_docdir}/%{name}
+%endif
 
 #------------------------------------------------------------------------
 %clean
