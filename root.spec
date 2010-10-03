@@ -1,6 +1,6 @@
 %define name	root
 %define version	v5.27.06
-%define release	%mkrel 1
+%define release	%mkrel 2
 %define rootdir	%{_datadir}/%{name}
 
 Name:		%{name}
