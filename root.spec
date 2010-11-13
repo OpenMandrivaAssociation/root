@@ -36,10 +36,13 @@ BuildRequires:	readline-devel
 BuildRequires:	ruby-devel
 BuildRequires:	tiff-devel
 BuildRequires:	zlib-devel
-%py_requires	-d
+BuildRequires:	python-devel
 
 # x3d
 Requires:	x11-font-sony-misc
+
+# https://savannah.cern.ch/bugs/?reload=1&func=detailitem&item_id=74108
+Patch0:		/home/pcpa/rpm/SOURCES/root-trunc-svn-36369.patch
 
 %description
 ROOT is a framework for data processing, born at CERN, at the heart of the
