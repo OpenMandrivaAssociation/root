@@ -85,6 +85,8 @@ ROOT applications to analyze their data or to perform simulations.
 %prep
 %setup -q -n %{name}
 
+%patch0 -p1
+
 #------------------------------------------------------------------------
 %build
 # not an autotools configure (it just quarks like one)
