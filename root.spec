@@ -142,7 +142,7 @@ mkdir -p %{buildroot}%{_docdir}/%{name}
 %if %{mdkversion} < 201010
 xz -cd %{SOURCE1} | tar -xf -C %{buildroot}%{_docdir}/%{name}
 %else
-tar zxf %{SOURCE1} -C %{buildroot}%{_docdir}/%{name}
+tar Jxf %{SOURCE1} -C %{buildroot}%{_docdir}/%{name}
 %endif
 
 #------------------------------------------------------------------------
