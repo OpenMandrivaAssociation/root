@@ -41,9 +41,6 @@ BuildRequires:	python-devel
 # x3d
 Requires:	x11-font-sony-misc
 
-# https://savannah.cern.ch/bugs/?reload=1&func=detailitem&item_id=74108
-Patch0:		/home/pcpa/rpm/SOURCES/root-trunc-svn-36369.patch
-
 %description
 ROOT is a framework for data processing, born at CERN, at the heart of the
 research on high-energy physics.  Every day, thousands of physicists use
@@ -63,6 +60,18 @@ ROOT applications to analyze their data or to perform simulations.
 %{_includedir}/%{name}/*
 %dir %{rootdir}
 %{rootdir}/*
+%doc %{_docdir}/%{name}/BUILDSYSTEM
+%doc %{_docdir}/%{name}/cfortran.doc
+%doc %{_docdir}/%{name}/ChangeLog*
+%doc %{_docdir}/%{name}/INSTALL
+%doc %{_docdir}/%{name}/README*
+%{_docdir}/%{name}/COPYING.CINT
+%{_docdir}/%{name}/CREDITS
+%{_docdir}/%{name}/COPYING.CINT
+%{_docdir}/%{name}/LICENSE
+%{_docdir}/%{name}/test
+%{_docdir}/%{name}/tutorials
+%{_mandir}/man1/*
 
 #------------------------------------------------------------------------
 %package	doc
@@ -77,15 +86,11 @@ ROOT applications to analyze their data or to perform simulations.
 
 %files		doc
 %defattr(-,root,root)
-%doc %dir %{_docdir}/%{name}
-%doc %{_docdir}/%{name}/*
-%{_mandir}/man1/*
+%doc %{_docdir}/%{name}/htmldoc
 
 #------------------------------------------------------------------------
 %prep
 %setup -q -n %{name}
-
-%patch0 -p1
 
 #------------------------------------------------------------------------
 %build
