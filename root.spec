@@ -1,5 +1,5 @@
 %define name	root
-%define version	v5.28.00
+%define version	5.28.00
 %define release	%mkrel 2
 %define rootdir	%{_datadir}/%{name}
 
@@ -10,7 +10,7 @@ Version:	%{version}
 Release:	%{release}
 Summary:	CERN framework for data processing
 URL:		http://root.cern.ch/drupal
-Source0:	ftp://root.cern.ch/root/%{name}_%{version}.source.tar.xz
+Source0:	ftp://root.cern.ch/root/%{name}_v%{version}.source.tar.xz
 Source1:	ftp://root.cern.ch/root/html528.tar.xz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires:	fftw3-devel
