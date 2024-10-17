@@ -9,7 +9,7 @@ License:	GPL
 Version:	%{version}
 Release:	%{release}
 Summary:	CERN framework for data processing
-URL:		http://root.cern.ch/drupal
+URL:		https://root.cern.ch/drupal
 # ftp://root.cern.ch/root/root_v5.32.00.source.tar.gz recompressed
 Source0:	root_v5.32.00.source.tar.xz
 # ftp://root.cern.ch/root/html532.tar.gz recompressed
