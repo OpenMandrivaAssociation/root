@@ -15,6 +15,11 @@ Source0:	root_v5.32.00.source.tar.xz
 # ftp://root.cern.ch/root/html532.tar.gz recompressed
 Source1:	html532.tar.xz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	fftw3-devel
 BuildRequires:	freetype2-devel
 BuildRequires:	GL-devel
